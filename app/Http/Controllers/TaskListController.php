@@ -39,11 +39,11 @@ class TaskListController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $validated = $request->validate([
-                'title' => ['required', 'string', 'min:3'],
-            ]);
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:190'],
+        ]);
 
+        try {
             $taskList = auth()->user()?->taskLists()->create([
                 'title' => $validated['title']
             ]);
@@ -101,11 +101,11 @@ class TaskListController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $validated = $request->validate([
-                'title' => ['required', 'string', 'min:3'],
-            ]);
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'min:3', 'max:190'],
+        ]);
 
+        try {
             $taskList = auth()->user()?->taskLists()
                 ->find($id)
                 ?->update([

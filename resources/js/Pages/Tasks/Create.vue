@@ -5,19 +5,24 @@ import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TaskListsComponent from "@/Pages/TaskLists/TaskListsComponent.vue";
+import {toRef} from "vue";
 
-defineProps({
+const props = defineProps({
     taskLists: {
         type: Object,
+    },
+    taskListId: {
+        type: String,
     },
 });
 
 const form = useForm({
+    taskListId: props.taskListId,
     title: '',
 })
 
 const submit = () => {
-    form.post(route('task-lists.store'), {
+    form.post(route('tasks.store'), {
         preserveScroll: true
     })
 }
@@ -28,7 +33,7 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Task list > create</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Task > create</h2>
         </template>
 
         <div class="py-12">
@@ -40,6 +45,11 @@ const submit = () => {
                 <div class=" w-3/4 bg-white shadow-sm sm:rounded-lg p-4">
                     <form @submit.prevent="submit" class="">
                         <div>
+                            <TextInput
+                                id="taskListId"
+                                type="text"
+                                class="hidden"
+                                v-model="form.taskListId"/>
                             <TextInput
                                 id="title"
                                 type="text"

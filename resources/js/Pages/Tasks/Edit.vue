@@ -1,26 +1,31 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import TaskListsComponent from "@/Pages/TaskLists/TaskListsComponent.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { toRef } from "vue";
 import InputError from "@/Components/InputError.vue";
 import TextInput from "@/Components/TextInput.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TaskListsComponent from "@/Pages/TaskLists/TaskListsComponent.vue";
 
-defineProps({
+const props = defineProps({
     taskLists: {
+        type: Object,
+    },
+    task: {
         type: Object,
     },
 });
 
 const form = useForm({
-    title: '',
-})
+    title: toRef(props.task.title),
+});
 
-const submit = () => {
-    form.post(route('task-lists.store'), {
+const submit = (task) => {
+    form.put(route('tasks.update', task.id), {
         preserveScroll: true
     })
 }
+
 </script>
 
 <template>
@@ -28,7 +33,7 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Task list > create</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Task > edit</h2>
         </template>
 
         <div class="py-12">
@@ -37,8 +42,8 @@ const submit = () => {
                     <TaskListsComponent :taskLists="taskLists" />
                 </div>
 
-                <div class=" w-3/4 bg-white shadow-sm sm:rounded-lg p-4">
-                    <form @submit.prevent="submit" class="">
+                <div class="w-3/4 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
+                    <form @submit.prevent="submit(task)" class="">
                         <div>
                             <TextInput
                                 id="title"
@@ -60,6 +65,7 @@ const submit = () => {
                         </PrimaryButton>
                     </form>
                 </div>
+
             </div>
         </div>
     </AuthenticatedLayout>

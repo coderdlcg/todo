@@ -14,6 +14,6 @@ class Task extends Model
 
     public function list(): BelongsTo
     {
-        return $this->belongsTo(TaskList::class);
+        return $this->belongsTo(TaskList::class, 'task_list_id', 'id');
     }
 }
