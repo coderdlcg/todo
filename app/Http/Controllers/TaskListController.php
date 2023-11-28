@@ -102,7 +102,7 @@ class TaskListController extends Controller
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
-            'title' => ['required', 'string', 'min:3', 'max:190'],
+            'title' => ['required', 'string', 'min:3', 'max:18'],
         ]);
 
         try {
@@ -117,7 +117,7 @@ class TaskListController extends Controller
         } catch (\Exception $e) {
             Log::error('Exception TaskListController update(): ' . $e->getMessage(), [$request->all()]);
 
-            return redirect()->back();
+            return redirect()->route('task-lists.show', $id);
         }
     }
 

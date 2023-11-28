@@ -55,8 +55,8 @@ const deleteTaskList = (taskList) => {
                 </div>
 
                 <div class="w-3/4 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                    <div class="m-2 border-b-2 p-2 flex justify-between mb-4 items-center">
-                        <div class="text-xl w-full px-4">{{ taskList.title }}</div>
+                    <div class="my-2 border-b-2 py-2 flex justify-between mb-4 items-center">
+                        <div class="text-xl w-full">{{ taskList.title }}</div>
                         <div class="actions flex gap-3">
                             <Link :href="route('task-lists.edit', taskList.id)" class="px-4 py-2 bg-gray-800 text-white rounded-lg" >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
