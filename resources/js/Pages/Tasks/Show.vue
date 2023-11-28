@@ -75,7 +75,7 @@ const deleteTask = (task) => {
                 <Modal :show="confirmingTaskDeletion" @close="closeModal">
                     <div class="p-6">
                         <h2 class="text-lg font-medium text-gray-900">
-                            Are you sure you want to delete your task list: {{ task.title }}?
+                            Are you sure you want to delete your task: {{ task.title }}?
                         </h2>
 
                         <div class="mt-6 flex justify-end">
@@ -87,7 +87,7 @@ const deleteTask = (task) => {
                                 :disabled="form.processing"
                                 @click="deleteTask(task)"
                             >
-                                Delete task list
+                                Delete task
                             </DangerButton>
                         </div>
                     </div>
